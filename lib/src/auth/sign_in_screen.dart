@@ -7,22 +7,32 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(197, 253, 191, 1.0),
+      backgroundColor: const Color.fromRGBO(222, 223, 228, 3.0),
       //Color.fromRGBO(210, 210, 167, 1.0),
 
       body: Column(
         children: [
           Expanded(
-              child: Container(
-            height: 200,
-            width: double.infinity,
-            decoration: const BoxDecoration(
-              color: Color.fromRGBO(197, 253, 191, 1.0),
-              image: DecorationImage(
-                  image: AssetImage("assets/images/grocery_with_text.png"),
-                  fit: BoxFit.cover),
+            child: Container(
+              height: 200,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                color: Color.fromRGBO(222, 223, 228, 3.0),
+                image: DecorationImage(
+                    image: AssetImage("assets/images/green_grocery_health.png"),
+                    fit: BoxFit.cover),
+              ),
             ),
-          )),
+          ),
+
+          // AnimatedTextKit(
+          //   animatedTexts: [
+          //     FadeAnimatedText('Frutas'),
+          //     FadeAnimatedText('Carnes'),
+          //     FadeAnimatedText('Verduras'),
+          //     FadeAnimatedText('Grãos')
+          //   ],
+          // ),
 
           // FORMULÁRIO
           Container(
@@ -33,7 +43,6 @@ class SignInScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-
                 // Email
                 const CustomTextField(
                   icon: Icons.email,
