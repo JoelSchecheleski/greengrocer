@@ -71,5 +71,6 @@ List<String> categorias = [
   'Verduras',
   'Temperos',
   'Cereais',
+  'Carnes'
 ];
 
