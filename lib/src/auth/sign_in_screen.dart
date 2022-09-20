@@ -1,6 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/auth/components/custom_text_field.dart';
+import 'package:greengrocer/src/auth/sign_up_screen.dart';
 
 import '../config/custom_colors.dart';
 
@@ -9,11 +10,11 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: CustomColors.customSwatchColor, // Color.fromRGBO(78, 136, 27, 1.0),
+      backgroundColor: CustomColors.customSwatchColor,
+      // Color.fromRGBO(78, 136, 27, 1.0),
       body: SingleChildScrollView(
         child: SizedBox(
           height: size.height,
@@ -28,7 +29,8 @@ class SignInScreen extends StatelessWidget {
                       // height: 200,
                       width: double.infinity,
                       decoration: BoxDecoration(
-                        color: CustomColors.customSwatchColor, //Color.fromRGBO(78, 136, 27, 1.0),
+                        color: CustomColors.customSwatchColor,
+                        //Color.fromRGBO(78, 136, 27, 1.0),
                         image: const DecorationImage(
                             image: AssetImage("assets/images/green.png"),
                             fit: BoxFit.cover),
@@ -76,10 +78,12 @@ class SignInScreen extends StatelessWidget {
 
               // FORMULÁRIO
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 32, vertical: 40),
                 decoration: const BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(45))),
+                    borderRadius:
+                        BorderRadius.vertical(top: Radius.circular(45))),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
@@ -106,10 +110,12 @@ class SignInScreen extends StatelessWidget {
                           ),
                         ),
                         onPressed: () {},
-                        child: const Text('Entrar',
-                            style: TextStyle(
-                              fontSize: 18,
-                            )),
+                        child: const Text(
+                          'Entrar',
+                          style: TextStyle(
+                            fontSize: 18,
+                          ),
+                        ),
                       ),
                     ),
 
@@ -121,7 +127,8 @@ class SignInScreen extends StatelessWidget {
                         child: Text(
                           'Esqueceu a senha?',
                           style: TextStyle(
-                            color: CustomColors.customContrastColor, // Colors.red,
+                            color:
+                                CustomColors.customContrastColor, // Colors.red,
                           ),
                         ),
                       ),
@@ -162,7 +169,13 @@ class SignInScreen extends StatelessWidget {
                             borderRadius: BorderRadius.circular(18),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(builder: (c) {
+                              return const SignUpScreen();
+                            }),
+                          );
+                        },
                         child: const Text(
                           'Criar conta',
                           style: TextStyle(fontSize: 18),
