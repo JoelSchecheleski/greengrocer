@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
       title: 'GreenGrocery',
       theme: ThemeData(
         primarySwatch: Colors.green,
+        scaffoldBackgroundColor: Colors.white.withAlpha(190),
       ),
       debugShowCheckedModeBanner: false,
       home: SignInScreen(),
