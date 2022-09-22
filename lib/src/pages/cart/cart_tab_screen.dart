@@ -23,7 +23,7 @@ class _CartTabScreenState extends State<CartTabScreen> {
 
   double cartTotalPrice() {
     double total = 0;
-    for(var item in appData.cartItems) {
+    for (var item in appData.cartItems) {
       total += item.totalPrice();
     }
     return total;
@@ -42,7 +42,9 @@ class _CartTabScreenState extends State<CartTabScreen> {
             child: ListView.builder(
               itemCount: appData.cartItems.length,
               itemBuilder: (_, index) {
-                return CartTile(cartItem: appData.cartItems[index], remove: removeItemFromCart);
+                return CartTile(
+                    cartItem: appData.cartItems[index],
+                    remove: removeItemFromCart);
               },
             ),
           ),
@@ -89,7 +91,11 @@ class _CartTabScreenState extends State<CartTabScreen> {
                         borderRadius: BorderRadius.circular(18),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      // confirmar se deseja finalizar
+                      bool? result = await showOrderConfirmation();
+                      print(result);
+                    },
                     child: const Text(
                       "Concluir pedido",
                       style: TextStyle(fontSize: 18),
@@ -101,6 +107,42 @@ class _CartTabScreenState extends State<CartTabScreen> {
           )
         ],
       ),
+    );
+  }
+
+  Future<bool?> showOrderConfirmation() {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          title: const Text("Confirmação"),
+          content: const Text("Deseja realmente concluir o pedido?"),
+          actions: [
+            TextButton(
+              onPressed: () {
+                //
+                Navigator.of(context).pop(false);
+              },
+              child: const Text("Não"),
+            ),
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              onPressed: () {
+                //
+                Navigator.of(context).pop(true);
+              },
+              child: const Text("Sim"),
+            ),
+          ],
+        );
+      },
     );
   }
 }
