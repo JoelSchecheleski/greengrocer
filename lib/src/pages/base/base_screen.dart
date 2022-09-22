@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greengrocer/src/pages/cart/cart_tab_screen.dart';
 import 'package:greengrocer/src/pages/home/home_tab_screen.dart';
 
 class BaseScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class _BaseScreenState extends State<BaseScreen> {
         controller: pageController,
         children: [
           const HomeTabScreen(),
-          Container(color: Colors.yellow, child: Text('Tela 2')),
+          CartTabScreen(),
           Container(color: Colors.blue, child: Text('Tela 3')),
           Container(color: Colors.purple, child: Text('Tela 4'))
         ],

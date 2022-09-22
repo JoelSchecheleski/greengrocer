@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
 
-class QuatityWidget extends StatelessWidget {
+class QuantityWidget extends StatelessWidget {
   final int value;
   final String suffixText;
   final Function(int quantity) result;
 
-  const QuatityWidget({
+  const QuantityWidget({
     Key? key,
     required this.value,
     required this.suffixText,
@@ -29,6 +29,7 @@ class QuatityWidget extends StatelessWidget {
         ],
       ),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           // Decrement quantity
           _QuantityButton(
