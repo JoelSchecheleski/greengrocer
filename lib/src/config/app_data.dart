@@ -99,10 +99,10 @@ List<OrderModel> orders = [
       '2022-06-08 10:00:10.458',
     ),
     overdueDateTime: DateTime.parse(
-      '2022-06-08 11:00:10.458',
+      '2022-12-12 11:00:10.458',
     ),
     id: 'asd6a54da6s2d1',
-    status: 'pending_payment',
+    status: 'preparing_purchase',
     total: 11.0,
     items: [
       CartItemModel(
@@ -113,6 +113,10 @@ List<OrderModel> orders = [
         item: mango,
         quantity: 2,
       ),
+      CartItemModel(
+        item: grape,
+        quantity: 8,
+      ),
     ],
   ),
 
@@ -120,13 +124,53 @@ List<OrderModel> orders = [
   OrderModel(
     copyAndPaste: 'q1w2e3r4t5y6',
     createdDateTime: DateTime.parse(
-      '2022-06-08 10:00:10.458',
+      '2022-12-12 10:00:10.458',
     ),
     overdueDateTime: DateTime.parse(
-      '2022-06-08 11:00:10.458',
+      '2022-12-12 11:00:10.458',
     ),
     id: 'a65s4d6a2s1d6a5s',
     status: 'delivered',
+    total: 11.5,
+    items: [
+      CartItemModel(
+        item: guava,
+        quantity: 1,
+      ),
+    ],
+  ),
+
+  // Pedido 03
+  OrderModel(
+    copyAndPaste: 'q1w2e3r4t5y6',
+    createdDateTime: DateTime.parse(
+      '2022-12-12 10:00:10.458',
+    ),
+    overdueDateTime: DateTime.parse(
+      '2022-12-12 11:00:10.458',
+    ),
+    id: 'a65s4d6a2s1d6a5s',
+    status: 'refunded',
+    total: 11.5,
+    items: [
+      CartItemModel(
+        item: guava,
+        quantity: 1,
+      ),
+    ],
+  ),
+
+  // Pedido 04
+  OrderModel(
+    copyAndPaste: 'q1w2e3r4t5y6',
+    createdDateTime: DateTime.parse(
+      '2020-12-12 10:00:10.458',
+    ),
+    overdueDateTime: DateTime.parse(
+      '2020-12-12 11:00:10.458',
+    ),
+    id: 'a65s4d6a2s1d6a5s',
+    status: 'pending_payment',
     total: 11.5,
     items: [
       CartItemModel(

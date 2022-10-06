@@ -5,6 +5,8 @@ import 'package:greengrocer/src/pages/cart/components/cart_tile.dart';
 import 'package:greengrocer/src/services/utils_service.dart';
 import 'package:greengrocer/src/config/app_data.dart' as appData;
 
+import '../common_widgets/payment_dialog.dart';
+
 class CartTabScreen extends StatefulWidget {
   const CartTabScreen({Key? key}) : super(key: key);
 
@@ -94,7 +96,16 @@ class _CartTabScreenState extends State<CartTabScreen> {
                     onPressed: () async {
                       // confirmar se deseja finalizar
                       bool? result = await showOrderConfirmation();
-                      print(result);
+                      if (result ?? false) {
+                        // Copia e cola
+                        showDialog(
+                            context: context,
+                            builder: (_) {
+                              return PaymentDialog(
+                                order: appData.orders.first, // somente testes
+                              );
+                            });
+                      }
                     },
                     child: const Text(
                       "Concluir pedido",
