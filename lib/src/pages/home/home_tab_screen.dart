@@ -4,6 +4,7 @@ import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/pages/home/components/category_tile.dart';
 import 'package:greengrocer/src/config/app_data.dart' as appData;
 import 'package:greengrocer/src/pages/home/components/item_tile.dart';
+import 'package:greengrocer/src/services/utils_service.dart';
 
 class HomeTabScreen extends StatefulWidget {
   const HomeTabScreen({Key? key}) : super(key: key);
@@ -15,6 +16,8 @@ class HomeTabScreen extends StatefulWidget {
 class _HomeTabScreenState extends State<HomeTabScreen> {
   String selectedCategory = 'Frutas';
 
+  final UtilsServices utilsServices = UtilsServices();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,21 +26,29 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
-        title: Text.rich(
-          TextSpan(
-            style: const TextStyle(
-              fontSize: 30,
+        title: GestureDetector(
+          onTap: () {
+            utilsServices.showToast(
+              message: 'GreenGrocer',
+              isError: false,
+            );
+          },
+          child: Text.rich(
+            TextSpan(
+              style: const TextStyle(
+                fontSize: 30,
+              ),
+              children: [
+                TextSpan(
+                  text: 'Green',
+                  style: TextStyle(color: CustomColors.customSwatchColor),
+                ),
+                TextSpan(
+                  text: 'grocer',
+                  style: TextStyle(color: CustomColors.customContrastColor),
+                ),
+              ],
             ),
-            children: [
-              TextSpan(
-                text: 'Green',
-                style: TextStyle(color: CustomColors.customSwatchColor),
-              ),
-              TextSpan(
-                text: 'grocer',
-                style: TextStyle(color: CustomColors.customContrastColor),
-              ),
-            ],
           ),
         ),
         // actions
@@ -128,17 +139,18 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
           // Grid
           Expanded(
             child: GridView.builder(
-              padding: const EdgeInsets.fromLTRB(16,0,16,16),
+              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
               physics: const BouncingScrollPhysics(),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                childAspectRatio: 9 / 11.5
-              ),
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 9 / 11.5),
               itemCount: appData.items.length,
               itemBuilder: (_, index) {
-                return ItemTile(item: appData.items[index],);
+                return ItemTile(
+                  item: appData.items[index],
+                );
               },
             ),
           ),
