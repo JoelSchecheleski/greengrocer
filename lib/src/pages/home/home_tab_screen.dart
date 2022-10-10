@@ -2,6 +2,7 @@ import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/pages/common_widgets/app_name_widget.dart';
+import 'package:greengrocer/src/pages/common_widgets/custom_shimmer.dart';
 import 'package:greengrocer/src/pages/home/components/category_tile.dart';
 import 'package:greengrocer/src/config/app_data.dart' as appData;
 import 'package:greengrocer/src/pages/home/components/item_tile.dart';
@@ -18,6 +19,17 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
   String selectedCategory = 'Frutas';
 
   final UtilsServices utilsServices = UtilsServices();
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      setState(() {
+        isLoading = false;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -103,41 +115,78 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
               left: 25,
             ),
             height: 40,
-            child: ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (_, index) {
-                return CategoryTile(
-                  category: appData.categorias[index],
-                  isSelected: appData.categorias[index] == selectedCategory,
-                  onPressed: () {
-                    setState(() {
-                      selectedCategory = appData.categorias[index];
-                    });
-                  },
-                );
-              },
-              separatorBuilder: (_, index) => const SizedBox(width: 10),
-              itemCount: appData.categorias.length,
-            ),
+            child: !isLoading
+                ? ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (_, index) {
+                      return CategoryTile(
+                        category: appData.categorias[index],
+                        isSelected:
+                            appData.categorias[index] == selectedCategory,
+                        onPressed: () {
+                          setState(() {
+                            selectedCategory = appData.categorias[index];
+                          });
+                        },
+                      );
+                    },
+                    separatorBuilder: (_, index) => const SizedBox(width: 10),
+                    itemCount: appData.categorias.length,
+                  )
+                : ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: List.generate(
+                      10,
+                      (index) => Container(
+                        margin: const EdgeInsets.only(
+                          right: 12,
+                        ),
+                        alignment: Alignment.center,
+                        child: CustomShimmer(
+                          borderRadius: BorderRadius.circular(20),
+                          height: 20,
+                          width: 80,
+                        ),
+                      ),
+                    ),
+                  ),
           ),
 
           // Grid
           Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-              physics: const BouncingScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 10,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 9 / 11.5),
-              itemCount: appData.items.length,
-              itemBuilder: (_, index) {
-                return ItemTile(
-                  item: appData.items[index],
-                );
-              },
-            ),
+            child: !isLoading
+                ? GridView.builder(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    physics: const BouncingScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 10,
+                            childAspectRatio: 9 / 11.5),
+                    itemCount: appData.items.length,
+                    itemBuilder: (_, index) {
+                      return ItemTile(
+                        item: appData.items[index],
+                      );
+                    },
+                  )
+                : GridView.count(
+                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                    physics: const BouncingScrollPhysics(),
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 9 / 11.5,
+                    children: List.generate(
+                      10,
+                      (_) => CustomShimmer(
+                        borderRadius: BorderRadius.circular(20),
+                        height: double.infinity,
+                        width: double.infinity,
+                      ),
+                    ),
+                  ),
           ),
         ],
       ),

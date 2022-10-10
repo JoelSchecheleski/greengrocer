@@ -77,6 +77,7 @@ class _CartTabScreenState extends State<CartTabScreen> {
                 const Text(
                   "Total geral",
                   style: TextStyle(
+                    fontFamily: 'IndieFlower',
                     fontSize: 12,
                   ),
                 ),
@@ -92,7 +93,7 @@ class _CartTabScreenState extends State<CartTabScreen> {
                   height: 50,
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: CustomColors.customSwatchColor,
+                      // backgroundColor: CustomColors.customSwatchColor,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(18),
                       ),
