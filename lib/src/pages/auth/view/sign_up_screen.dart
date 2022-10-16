@@ -95,7 +95,9 @@ class SignUpScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(18),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              // TODO: Implementar o cadastro de usuário
+                            },
                             child: const Text(
                               'Cadastrar usuário',
                               style: TextStyle(
