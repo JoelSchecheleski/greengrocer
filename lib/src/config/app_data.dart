@@ -84,7 +84,7 @@ List<CartItemModel> cartItems = [
 ];
 
 UserModel user = UserModel(
-  name: 'Joel Schecheleski',
+  fullname: 'Joel Schecheleski',
   email: 'joel.jsp@gmail.com',
   phone: '47 9 9668-8829',
   cpf: '050.710.439-04',

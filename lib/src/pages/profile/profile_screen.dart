@@ -38,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
           // Nome
           CustomTextField(
-            initialValue: appData.user.name,
+            initialValue: appData.user.fullname,
             icon: Icons.person,
             label: 'Nome',
             readOnly: true,

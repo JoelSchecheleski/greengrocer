@@ -2,15 +2,28 @@
 
 A new Flutter project.
 
-## Getting Started
+## Dependencies
 
-This project is a starting point for a Flutter application.
+- json_serializable ^6.5.1
+- animated_text_kit: ^4.2.2
+- mask_text_input_formatter: ^2.4.0
+- badges: ^2.0.3
+- intl: ^0.17.0
+- qr_flutter: ^4.0.0
+- fluttertoast: ^8.0.9
+- shimmer: ^2.0.0
+- get: ^4.6.5
+- dio: ^4.0.6
+- json_annotation: ^4.7.0
 
-A few resources to get you started if this is your first Flutter project:
+## Dev_dependencies
+- flutter_lints: ^2.0.0
+- flutter_launcher_icons: ^0.10.0
+- json_serializable: ^6.5.1
+- build_runner: ^2.3.0
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## command to Auto-generate toJson, fromJson
+``` batch
+    flutter pub run build_runner build
+```
