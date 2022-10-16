@@ -138,7 +138,6 @@ class SignInScreen extends StatelessWidget {
                                             passwordController.text;
                                         authController.signIn(
                                             email: email, password: password);
-                                        // Get.offNamed(PagesRoutes.baseRoute);
                                       } else {
                                         print(
                                             "Valores informados pelo usuário são inválidos!!");
