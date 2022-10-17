@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/pages/common_widgets/custom_text_field.dart';
+import 'package:greengrocer/src/services/validators.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -15,6 +16,8 @@ class SignUpScreen extends StatelessWidget {
     mask: '(##) # ####-####',
     filter: {'#': RegExp(r'[0-9]')},
   );
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -52,61 +55,74 @@ class SignUpScreen extends StatelessWidget {
                         top: Radius.circular(45),
                       ),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        // Email
-                        const CustomTextField(
-                          icon: Icons.email,
-                          label: 'Email',
-                        ),
-                        // Senha
-                        const CustomTextField(
-                          icon: Icons.lock,
-                          label: 'Password',
-                          isSecret: true,
-                        ),
-                        // Nome
-                        const CustomTextField(
-                          icon: Icons.person,
-                          label: 'Name',
-                          isSecret: false,
-                        ),
-                        // Celular
-                        CustomTextField(
-                          icon: Icons.phone,
-                          label: 'Cellphone',
-                          isSecret: false,
-                          inputFormatter: [phoneFormatter],
-                        ),
-                        // CPF
-                        CustomTextField(
-                          icon: Icons.file_copy,
-                          label: 'Cpf',
-                          isSecret: false,
-                          inputFormatter: [cpfFormatter],
-                        ),
-                        // Botão de cadastrar
-                        SizedBox(
-                          height: 50,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          // Email
+                          const CustomTextField(
+                            icon: Icons.email,
+                            label: 'Email',
+                            textInputType: TextInputType.emailAddress,
+                            validator: emailValidator,
+                          ),
+                          // Senha
+                          const CustomTextField(
+                            icon: Icons.lock,
+                            label: 'Password',
+                            textInputType: TextInputType.visiblePassword,
+                            isSecret: true,
+                            validator: passwordValidator,
+                          ),
+                          // Nome
+                          const CustomTextField(
+                            icon: Icons.person,
+                            label: 'Name',
+                            isSecret: false,
+                            textInputType: TextInputType.name,
+                            validator: nameValidator,
+                          ),
+                          // Celular
+                          CustomTextField(
+                            icon: Icons.phone,
+                            label: 'Cellphone',
+                            isSecret: false,
+                            inputFormatter: [phoneFormatter],
+                            textInputType: TextInputType.phone,
+                            validator: phoneValidator,
+                          ),
+                          // CPF
+                          CustomTextField(
+                            icon: Icons.file_copy,
+                            label: 'Cpf',
+                            isSecret: false,
+                            inputFormatter: [cpfFormatter],
+                            textInputType: TextInputType.number,
+                            validator: cpfValidator,
+                          ),
+                          // Botão de cadastrar
+                          SizedBox(
+                            height: 50,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18),
+                                ),
                               ),
-                            ),
-                            onPressed: () {
-                              // TODO: Implementar o cadastro de usuário
-                            },
-                            child: const Text(
-                              'Cadastrar usuário',
-                              style: TextStyle(
-                                fontSize: 18,
+                              onPressed: () {
+                                // TODO: Implementar o cadastro de usuário
+                              },
+                              child: const Text(
+                                'Cadastrar usuário',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ],
