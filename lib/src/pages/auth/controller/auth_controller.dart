@@ -18,6 +18,23 @@ class AuthController extends GetxController {
     validateToken();
   }
 
+  // Cadastro de usuário
+  Future<void> signUp() async {
+    isLoading.value = true;
+    AuthResult result = await authRepository.signUp(user);
+    isLoading.value = false;
+    result.when(
+      success: (user) {
+        this.user = user;
+        saveTokenAndProceedToBase();
+      },
+      error: (message) {
+        utilsServices.showToast(message: message, isError: true);
+      },
+    );
+  }
+
+  // Login de usuário
   Future<void> signIn({
     required String email,
     required String password,
@@ -39,6 +56,7 @@ class AuthController extends GetxController {
     );
   }
 
+  // Salva dados de sessão
   void saveTokenAndProceedToBase() {
     utilsServices.saveLocalData(
       key: StorageKeys.token,
@@ -47,6 +65,7 @@ class AuthController extends GetxController {
     Get.offNamed(PagesRoutes.baseRoute);
   }
 
+  // Valida o token para o usuário não ter que logar novamente
   Future<void> validateToken() async {
     String? token = await utilsServices.getLocalData(key: StorageKeys.token);
     if (token == null) {
@@ -60,11 +79,12 @@ class AuthController extends GetxController {
         saveTokenAndProceedToBase();
       },
       error: (message) {
-        signOut();
+        signOut(); // Caso token inválido, limpa os dados de usuário
       },
     );
   }
 
+  // Zera as informações de login
   Future<void> signOut() async {
     // Zerar user
     user = UserModel();
