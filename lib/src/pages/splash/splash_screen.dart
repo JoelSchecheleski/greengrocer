@@ -3,23 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:greengrocer/src/page_routes/app_pages.dart';
 import 'package:greengrocer/src/pages/common_widgets/app_name_widget.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(
-      const Duration(seconds: 2),
-        () => Get.offNamed(PagesRoutes.signRoute)
-    );
-  }
-
+  // @override
   @override
   Widget build(BuildContext context) {
     return Material(
