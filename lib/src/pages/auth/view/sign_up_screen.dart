@@ -111,7 +111,7 @@ class SignUpScreen extends StatelessWidget {
                                 ),
                               ),
                               onPressed: () {
-                                // TODO: Implementar o cadastro de usuário
+                                _formKey.currentState!.validate();
                               },
                               child: const Text(
                                 'Cadastrar usuário',
