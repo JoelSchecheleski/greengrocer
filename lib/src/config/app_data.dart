@@ -9,7 +9,7 @@ ItemModel apple = ItemModel(
   picture: 'assets/images/fruits/apple.png',
   title: 'Maçã',
   price: 5.5,
-  unit: 'kg',
+  unit: 'kg'
 );
 
 ItemModel grape = ItemModel(

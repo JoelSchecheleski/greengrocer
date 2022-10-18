@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:greengrocer/src/models/category_model.dart';
+import 'package:greengrocer/src/models/item_model.dart';
 import 'package:greengrocer/src/pages/home/repository/home_repository.dart';
 import 'package:greengrocer/src/pages/home/result/home_result.dart';
 import 'package:greengrocer/src/services/utils_service.dart';
@@ -22,6 +23,7 @@ class HomeController extends GetxController {
     getAllCategories();
   }
 
+  // Obtem as categorias
   Future<void> getAllCategories() async {
     setLoading(true);
     HomeResult<CategoryModel> homeResult =
@@ -47,5 +49,34 @@ class HomeController extends GetxController {
   void selectCategory(CategoryModel category) {
     currentCategory = category;
     update();
+
+    getProductList();
+  }
+
+  // Obtem os produtos
+  Future<void> getProductList() async {
+
+    Map<String, dynamic> body = {
+      'page': 0,
+      'title': null,
+      'categoryId': '5mjkt5ERRo',
+      'itemsPerPage': 20
+    };
+
+    setLoading(true);
+    HomeResult<ItemModel> homeResult = await homeRepository.getProductList(body);
+    setLoading(false);
+
+    homeResult.when(
+      success: (data) {
+        print(data.toString());
+      },
+      error: (message) {
+        utilsService.showToast(
+          message: message,
+          isError: true,
+        );
+      },
+    );
   }
 }
