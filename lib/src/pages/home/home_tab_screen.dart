@@ -1,3 +1,4 @@
+import 'package:get/get.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
@@ -6,6 +7,7 @@ import 'package:greengrocer/src/pages/common_widgets/custom_shimmer.dart';
 import 'package:greengrocer/src/pages/home/components/category_tile.dart';
 import 'package:greengrocer/src/config/app_data.dart' as appData;
 import 'package:greengrocer/src/pages/home/components/item_tile.dart';
+import 'package:greengrocer/src/pages/home/controller/home_controller.dart';
 import 'package:greengrocer/src/services/utils_service.dart';
 
 class HomeTabScreen extends StatefulWidget {
@@ -24,6 +26,9 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
   @override
   void initState() {
     super.initState();
+
+    Get.find<HomeController>().printExample();
+
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         isLoading = false;
