@@ -30,7 +30,7 @@ class AuthRepository {
         'password': password,
       },
     );
-    return handleUserOrError(result['result']);
+    return handleUserOrError(result);
   }
 
   // Validação de login
@@ -41,7 +41,7 @@ class AuthRepository {
       headers: {'X-Parse-Session-Token': token},
       body: {},
     );
-    return handleUserOrError(result['result']);
+    return handleUserOrError(result);
   }
 
   // Cadastro de usuário
@@ -51,6 +51,6 @@ class AuthRepository {
       method: HttpMethods.post,
       body: user.toJson(),
     );
-    return handleUserOrError(result['result']);
+    return handleUserOrError(result);
   }
 }
