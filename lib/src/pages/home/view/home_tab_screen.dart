@@ -18,21 +18,11 @@ class HomeTabScreen extends StatefulWidget {
 }
 
 class _HomeTabScreenState extends State<HomeTabScreen> {
-  String selectedCategory = 'Frutas';
-
   final UtilsServices utilsServices = UtilsServices();
-  bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-
-
-    Future.delayed(const Duration(seconds: 3), () {
-      setState(() {
-        isLoading = false;
-      });
-    });
   }
 
   @override
@@ -107,91 +97,97 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(45),
                   borderSide:
-                      const BorderSide(width: 0, style: BorderStyle.none),
+                  const BorderSide(width: 0, style: BorderStyle.none),
                 ),
               ),
             ),
           ),
 
           // Categorias
-          Container(
-            padding: const EdgeInsets.only(
-              left: 25,
-            ),
-            height: 40,
-            child: !isLoading
-                ? ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (_, index) {
-                      return CategoryTile(
-                        category: appData.categorias[index],
-                        isSelected:
-                            appData.categorias[index] == selectedCategory,
+          GetBuilder<HomeController>(
+            builder: (controller) {
+              return Container(
+                padding: const EdgeInsets.only(
+                  left: 25,
+                ),
+                height: 40,
+                child: !controller.isLoading
+                    ? ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (_, index) {
+                    return CategoryTile(
                         onPressed: () {
-                          setState(() {
-                            selectedCategory = appData.categorias[index];
-                          });
+                          //
+                          controller.selectCategory(controller.allCategories[index]);
                         },
-                      );
-                    },
-                    separatorBuilder: (_, index) => const SizedBox(width: 10),
-                    itemCount: appData.categorias.length,
-                  )
-                : ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: List.generate(
-                      10,
-                      (index) => Container(
-                        margin: const EdgeInsets.only(
-                          right: 12,
+                        category: controller.allCategories[index].title,
+                        isSelected: controller.allCategories[index] == controller.currentCategory
+                    );
+                  },
+                  separatorBuilder: (_, index) => const SizedBox(width: 10),
+                  itemCount: controller.allCategories.length,
+                )
+                    : ListView(
+                  scrollDirection: Axis.horizontal,
+                  children: List.generate(
+                    10,
+                        (index) =>
+                        Container(
+                          margin: const EdgeInsets.only(
+                            right: 12,
+                          ),
+                          alignment: Alignment.center,
+                          child: CustomShimmer(
+                            borderRadius: BorderRadius.circular(20),
+                            height: 20,
+                            width: 80,
+                          ),
                         ),
-                        alignment: Alignment.center,
-                        child: CustomShimmer(
-                          borderRadius: BorderRadius.circular(20),
-                          height: 20,
-                          width: 80,
-                        ),
-                      ),
-                    ),
                   ),
+                ),
+              );
+            },
           ),
 
           // Grid
-          Expanded(
-            child: !isLoading
-                ? GridView.builder(
-                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                    physics: const BouncingScrollPhysics(),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 10,
-                            crossAxisSpacing: 10,
-                            childAspectRatio: 9 / 11.5),
-                    itemCount: appData.items.length,
-                    itemBuilder: (_, index) {
-                      return ItemTile(
-                        item: appData.items[index],
-                      );
-                    },
-                  )
-                : GridView.count(
-                    padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                    physics: const BouncingScrollPhysics(),
+          GetBuilder<HomeController>(builder: (controller){
+            return Expanded(
+              child: !controller.isLoading
+                  ? GridView.builder(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                physics: const BouncingScrollPhysics(),
+                gridDelegate:
+                const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 10,
                     crossAxisSpacing: 10,
-                    childAspectRatio: 9 / 11.5,
-                    children: List.generate(
-                      10,
-                      (_) => CustomShimmer(
+                    childAspectRatio: 9 / 11.5),
+                itemCount: controller.allCategories.length,
+                itemBuilder: (_, index) {
+                  return ItemTile(
+                    item: appData.items[index],
+                  );
+                },
+              )
+                  : GridView.count(
+                padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                physics: const BouncingScrollPhysics(),
+                crossAxisCount: 2,
+                mainAxisSpacing: 10,
+                crossAxisSpacing: 10,
+                childAspectRatio: 9 / 11.5,
+                children: List.generate(
+                  10,
+                      (_) =>
+                      CustomShimmer(
                         borderRadius: BorderRadius.circular(20),
                         height: double.infinity,
                         width: double.infinity,
                       ),
-                    ),
-                  ),
-          ),
+                ),
+              ),
+            );
+          }),
         ],
       ),
     );
