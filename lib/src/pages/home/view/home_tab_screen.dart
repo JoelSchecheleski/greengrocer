@@ -27,7 +27,6 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
   void initState() {
     super.initState();
 
-    Get.find<HomeController>().printExample();
 
     Future.delayed(const Duration(seconds: 3), () {
       setState(() {
