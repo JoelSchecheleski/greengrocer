@@ -32,8 +32,8 @@ class _ProductScreenState extends State<ProductScreen> {
             children: [
               Expanded(
                 child: Hero(
-                  tag: widget.item.imgUrl,
-                  child: Image.asset(widget.item.imgUrl),
+                  tag: widget.item.picture,
+                  child: Image.asset(widget.item.picture),
                 ),
               ),
               Expanded(
@@ -59,7 +59,7 @@ class _ProductScreenState extends State<ProductScreen> {
                         children: [
                           Expanded(
                             child: Text(
-                              widget.item.itemName,
+                              widget.item.title,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                               style: const TextStyle(

@@ -57,16 +57,16 @@ class _ItemTileState extends State<ItemTile> {
                   // Imagem
                   Expanded(
                     child: Hero(
-                      tag: widget.item.imgUrl,
+                      tag: widget.item.picture,
                       child: Image.asset(
-                        widget.item.imgUrl,
+                        widget.item.picture,
                       ),
                     ),
                   ),
 
                   // Nome do produto
                   Text(
-                    widget.item.itemName,
+                    widget.item.title,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
