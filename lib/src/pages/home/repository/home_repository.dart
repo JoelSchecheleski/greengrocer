@@ -1,20 +1,25 @@
 import 'package:greengrocer/src/constants/endpoints.dart';
+import 'package:greengrocer/src/models/category_model.dart';
+import 'package:greengrocer/src/pages/home/result/home_result.dart';
 import 'package:greengrocer/src/services/http_manager.dart';
 
 class HomeRepository {
   final HttpManager _httpManager = HttpManager();
 
-  Future getAllCategories() async {
+  Future<HomeResult> getAllCategories() async {
     final result = await _httpManager.restRequest(
       url: EndPoints.getCategoryList,
       method: HttpMethods.post,
     );
 
-    if(result['result'] != null) {
-      //
+    if (result['result'] != null) {
+      List<CategoryModel> data =
+          (result['result'] as List<Map<String, dynamic>>)
+              .map((e) => CategoryModel.fromJson(e))
+              .toList();
+      return HomeResult<CategoryModel>.success(data);
     } else {
-      // Error
+      return HomeResult.error('Ocorreu um erro inesperado ao recuperar as categorias!');
     }
-
   }
 }
