@@ -25,7 +25,14 @@ Projeto voltado para o aprendizado do uso do GetX como gerenciador de estato.
 
 ## Command to Auto-generate toJson, fromJson
 ``` batch
-    flutter pub run build_runner build
+    flutter pub run build_runner build OR
+    flutter pub run build_runner watch
+```
+
+## Command to clean Auto-generate .g
+``` batch
+    flutter pub run build_runner build --delete-conflicting-outputs OR
+    flutter pub run build_runner watch --delete-conflicting-outputs
 ```
 
 ## Run adb wi-fi

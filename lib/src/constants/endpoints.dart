@@ -5,4 +5,5 @@ abstract class EndPoints {
   static const String signup = '$baseUrl/signup';
   static const String validationToken = '$baseUrl/validate-token';
   static const String resetPassword = '$baseUrl/reset-password';
+  static const String getCategoryList = '$baseUrl/get-category-list';
 }

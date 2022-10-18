@@ -34,4 +34,12 @@ abstract class PagesRoutes {
   static const String baseRoute = '/';
   static const String signRoute = '/signin';
   static const String signUpRoute = '/signup';
+  static const String getCategoryList = '/get-category-list';
+  static const String getCartItems = '/get-cart-items';
+  static const String addItemToCart = '/add-item-to-cart';
+  static const String modifyItemQuantity = '/modify-item-quantity';
+  static const String getProductList = '/get-product-list';
+  static const String checkout = '/checkout';
+  static const String getOrders = '/get-orders';
+  static const String getOrderItems = '/get-order-items';
 }
