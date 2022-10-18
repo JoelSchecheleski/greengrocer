@@ -2,6 +2,25 @@
 
 Projeto voltado para o aprendizado do uso do GetX como gerenciador de estato.
 
+<table>
+    <tr>
+        <th>Login</th>
+        <th>Cadastro</th>
+        <th>Lista de produtos</th>
+        <th>Carrinho</th>
+        <th>Pedido</th>
+        <th>Pix</th>
+        <th>Detalhes</th>
+    </tr>
+    <td><img src="https://user-images.githubusercontent.com/3439261/196536601-ccdeeeda-23fa-44eb-83a5-db6d7b64fcd3.jpg" width="128"/></td>
+    <td><img src="https://user-images.githubusercontent.com/3439261/196535345-7e5523b1-76c8-4b84-ab0f-340d00de7c80.jpg" width="128"/></td>
+    <td><img src="https://user-images.githubusercontent.com/3439261/196535384-8b007725-e149-4969-ba19-ad8f5fb50aa1.jpg" width="128"/></td>
+    <td><img src="https://user-images.githubusercontent.com/3439261/196535415-d50a0f5e-79ff-488f-8183-10bb50ed42ac.jpg" width="128"/></td>
+    <td><img src="https://user-images.githubusercontent.com/3439261/196535462-754c4aea-31d4-4acc-bf10-08194700c10e.jpg" width="128"/></td>
+    <td><img src="https://user-images.githubusercontent.com/3439261/196535527-fe246416-6f11-4122-ae0b-fc99977fe880.jpg" width="128"/></td>
+    <td><img src="https://user-images.githubusercontent.com/3439261/196535698-c6eed2ec-599d-478c-85ea-d356a8350f7d.jpg" width="128"/></td>
+</table>
+
 ## Dependencies
 
 - json_serializable ^6.5.1
