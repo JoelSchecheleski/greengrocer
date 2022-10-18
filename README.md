@@ -1,6 +1,6 @@
 # greengrocer
 
-A new Flutter project.
+Projeto voltado para o aprendizado do uso do GetX como gerenciador de estato.
 
 ## Dependencies
 
@@ -23,7 +23,12 @@ A new Flutter project.
 - build_runner: ^2.3.0
 
 
-## command to Auto-generate toJson, fromJson
+## Command to Auto-generate toJson, fromJson
 ``` batch
     flutter pub run build_runner build
+```
+
+## Run adb wi-fi
+``` batch
+    adb connect 192.168.1.3:5555
 ```

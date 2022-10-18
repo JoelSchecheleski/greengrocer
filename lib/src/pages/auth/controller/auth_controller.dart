@@ -95,4 +95,9 @@ class AuthController extends GetxController {
     // Direcionar ao login
     Get.offNamed(PagesRoutes.signRoute);
   }
+
+  // Envia link para recuperação de senha
+  Future<void> resetPassword(String email)async{
+    await authRepository.resetPassword(email);
+  }
 }
