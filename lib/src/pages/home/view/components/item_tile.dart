@@ -58,7 +58,7 @@ class _ItemTileState extends State<ItemTile> {
                   Expanded(
                     child: Hero(
                       tag: widget.item.picture,
-                      child: Image.asset(
+                      child: Image.network(
                         widget.item.picture,
                       ),
                     ),

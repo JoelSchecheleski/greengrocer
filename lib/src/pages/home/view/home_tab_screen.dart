@@ -97,7 +97,7 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(45),
                   borderSide:
-                  const BorderSide(width: 0, style: BorderStyle.none),
+                      const BorderSide(width: 0, style: BorderStyle.none),
                 ),
               ),
             ),
@@ -111,81 +111,82 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                   left: 25,
                 ),
                 height: 40,
-                child: !controller.isLoading
+                child: !controller.isCategoryLoading
                     ? ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (_, index) {
-                    return CategoryTile(
-                        onPressed: () {
-                          //
-                          controller.selectCategory(controller.allCategories[index]);
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (_, index) {
+                          return CategoryTile(
+                              onPressed: () {
+                                //
+                                controller.selectCategory(
+                                    controller.allCategories[index]);
+                              },
+                              category: controller.allCategories[index].title,
+                              isSelected: controller.allCategories[index] ==
+                                  controller.currentCategory);
                         },
-                        category: controller.allCategories[index].title,
-                        isSelected: controller.allCategories[index] == controller.currentCategory
-                    );
-                  },
-                  separatorBuilder: (_, index) => const SizedBox(width: 10),
-                  itemCount: controller.allCategories.length,
-                )
+                        separatorBuilder: (_, index) =>
+                            const SizedBox(width: 10),
+                        itemCount: controller.allCategories.length,
+                      )
                     : ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: List.generate(
-                    10,
-                        (index) =>
-                        Container(
-                          margin: const EdgeInsets.only(
-                            right: 12,
-                          ),
-                          alignment: Alignment.center,
-                          child: CustomShimmer(
-                            borderRadius: BorderRadius.circular(20),
-                            height: 20,
-                            width: 80,
+                        scrollDirection: Axis.horizontal,
+                        children: List.generate(
+                          10,
+                          (index) => Container(
+                            margin: const EdgeInsets.only(
+                              right: 12,
+                            ),
+                            alignment: Alignment.center,
+                            child: CustomShimmer(
+                              borderRadius: BorderRadius.circular(20),
+                              height: 20,
+                              width: 80,
+                            ),
                           ),
                         ),
-                  ),
-                ),
+                      ),
               );
             },
           ),
 
           // Grid
-          GetBuilder<HomeController>(builder: (controller){
+          GetBuilder<HomeController>(builder: (controller) {
             return Expanded(
-              child: !controller.isLoading
+              child: !controller.isProductLoading
                   ? GridView.builder(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                physics: const BouncingScrollPhysics(),
-                gridDelegate:
-                const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 10,
-                    crossAxisSpacing: 10,
-                    childAspectRatio: 9 / 11.5),
-                itemCount: controller.allCategories.length,
-                itemBuilder: (_, index) {
-                  return ItemTile(
-                    item: appData.items[index],
-                  );
-                },
-              )
-                  : GridView.count(
-                padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                physics: const BouncingScrollPhysics(),
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                childAspectRatio: 9 / 11.5,
-                children: List.generate(
-                  10,
-                      (_) =>
-                      CustomShimmer(
-                        borderRadius: BorderRadius.circular(20),
-                        height: double.infinity,
-                        width: double.infinity,
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                      physics: const BouncingScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 10,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 9 / 11.5,
                       ),
-                ),
-              ),
+                      itemCount: controller.allProducts.length,
+                      itemBuilder: (_, index) {
+                        return ItemTile(
+                          item: controller.allProducts[index],
+                        );
+                      },
+                    )
+                  : GridView.count(
+                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                      physics: const BouncingScrollPhysics(),
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 10,
+                      childAspectRatio: 9 / 11.5,
+                      children: List.generate(
+                        10,
+                        (_) => CustomShimmer(
+                          borderRadius: BorderRadius.circular(20),
+                          height: double.infinity,
+                          width: double.infinity,
+                        ),
+                      ),
+                    ),
             );
           }),
         ],
