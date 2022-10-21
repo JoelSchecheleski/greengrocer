@@ -166,6 +166,10 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                       ),
                       itemCount: controller.allProducts.length,
                       itemBuilder: (_, index) {
+                        if (((index + 1) == controller.allProducts.length) &&
+                            !controller.isLastPage) {
+                          controller.loadMoreProducts();
+                        }
                         return ItemTile(
                           item: controller.allProducts[index],
                         );
