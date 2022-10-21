@@ -56,5 +56,5 @@ Projeto voltado para o aprendizado do uso do GetX como gerenciador de estato.
 
 ## Run adb wi-fi
 ``` batch
-    adb connect 192.168.1.3:5555
+    adb connect 192.168.1.4:5555
 ```
