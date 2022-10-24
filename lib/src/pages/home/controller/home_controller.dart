@@ -113,4 +113,38 @@ class HomeController extends GetxController {
     currentCategory!.pagination++;
     getProductList(canLoad: false);
   }
+
+  // Filtrar dados pelo campos de pesquisa
+  void filterByTitle() {
+    for (var category in allCategories) {
+      // limpas as categorias
+      category.items.clear();
+      category.pagination = 0;
+    }
+
+    if (searchTitle.value.isEmpty) {
+      allCategories.removeAt(0);
+    } else {
+      CategoryModel? c = allCategories.firstWhereOrNull(
+        (category) => category.id == '',
+      );
+      if (c == null) {
+        final allProductsCategory = CategoryModel(
+          // Criar uma nova categoria com todos
+          id: '',
+          title: 'Todos',
+          items: [],
+          pagination: 0,
+        );
+        allCategories.insert(0, allProductsCategory);
+      } else {
+        c.items.clear();
+        c.pagination = 0;
+      }
+    }
+
+    currentCategory = allCategories.first;
+    update();
+    getProductList();
+  }
 }
