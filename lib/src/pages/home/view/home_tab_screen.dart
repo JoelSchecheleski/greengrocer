@@ -104,7 +104,11 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                               controller.searchTitle.value = '';
                               FocusScope.of(context).unfocus();
                             },
-                            icon: Icon(Icons.close, color: CustomColors.customContrastColor, size: 21,),
+                            icon: Icon(
+                              Icons.close,
+                              color: CustomColors.customContrastColor,
+                              size: 21,
+                            ),
                           )
                         : null,
                     // suffixIcon: ,
@@ -170,26 +174,40 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
           GetBuilder<HomeController>(builder: (controller) {
             return Expanded(
               child: !controller.isProductLoading
-                  ? GridView.builder(
-                      padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
-                      physics: const BouncingScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 10,
-                        crossAxisSpacing: 10,
-                        childAspectRatio: 9 / 11.5,
+                  ? Visibility(
+                      visible:
+                          (controller.currentCategory?.items ?? []).isNotEmpty,
+                      replacement: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.search_off,
+                              size: 40,
+                              color: CustomColors.customSwatchColor,
+                            ),
+                            const Text('Não há itens para apresentar')
+                          ]),
+                      child: GridView.builder(
+                        padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+                        physics: const BouncingScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                          childAspectRatio: 9 / 11.5,
+                        ),
+                        itemCount: controller.allProducts.length,
+                        itemBuilder: (_, index) {
+                          if (((index + 1) == controller.allProducts.length) &&
+                              !controller.isLastPage) {
+                            controller.loadMoreProducts();
+                          }
+                          return ItemTile(
+                            item: controller.allProducts[index],
+                          );
+                        },
                       ),
-                      itemCount: controller.allProducts.length,
-                      itemBuilder: (_, index) {
-                        if (((index + 1) == controller.allProducts.length) &&
-                            !controller.isLastPage) {
-                          controller.loadMoreProducts();
-                        }
-                        return ItemTile(
-                          item: controller.allProducts[index],
-                        );
-                      },
                     )
                   : GridView.count(
                       padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
