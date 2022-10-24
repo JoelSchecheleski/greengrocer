@@ -15,6 +15,8 @@ class HomeController extends GetxController {
   List<CategoryModel> allCategories = [];
   CategoryModel? currentCategory;
 
+  RxString searchTitle = ''.obs;
+
   List<ItemModel> get allProducts => currentCategory?.items ?? [];
 
   bool get isLastPage {
@@ -34,6 +36,16 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+
+    debounce(
+      searchTitle,
+      (_) {
+        //TODO: Disparar método de pesquisa no hom_service
+        update();
+      },
+      time: const Duration(milliseconds: 600),
+    );
+
     getAllCategories();
   }
 
@@ -69,7 +81,7 @@ class HomeController extends GetxController {
 
   // Obtem os produtos
   Future<void> getProductList({bool canLoad = true}) async {
-    if(canLoad) {
+    if (canLoad) {
       setLoading(true, isProduct: true);
     }
 
@@ -97,8 +109,8 @@ class HomeController extends GetxController {
   }
 
   // Carrega mais produtos
-  void loadMoreProducts(){
-    currentCategory!.pagination ++;
+  void loadMoreProducts() {
+    currentCategory!.pagination++;
     getProductList(canLoad: false);
   }
 }

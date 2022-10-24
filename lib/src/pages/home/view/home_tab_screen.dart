@@ -5,7 +5,6 @@ import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/pages/common_widgets/app_name_widget.dart';
 import 'package:greengrocer/src/pages/common_widgets/custom_shimmer.dart';
 import 'package:greengrocer/src/pages/home/view/components/category_tile.dart';
-import 'package:greengrocer/src/config/app_data.dart' as appData;
 import 'package:greengrocer/src/pages/home/view/components/item_tile.dart';
 import 'package:greengrocer/src/pages/home/controller/home_controller.dart';
 import 'package:greengrocer/src/services/utils_service.dart';
@@ -19,11 +18,9 @@ class HomeTabScreen extends StatefulWidget {
 
 class _HomeTabScreenState extends State<HomeTabScreen> {
   final UtilsServices utilsServices = UtilsServices();
+  final searchController = TextEditingController();
 
-  @override
-  void initState() {
-    super.initState();
-  }
+  // final controller = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {
@@ -74,33 +71,52 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
       body: Column(
         children: [
           // Campo de pesquisa
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 10,
-            ),
-            child: TextFormField(
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                isDense: true,
-                hintText: "Pesquisar",
-                hintStyle: TextStyle(
-                  color: Colors.grey.shade400,
-                  fontSize: 14,
+          GetBuilder<HomeController>(
+            builder: (controller) {
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
                 ),
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: CustomColors.customContrastColor,
-                  size: 21,
+                child: TextFormField(
+                  controller: searchController,
+                  onChanged: (value) {
+                    controller.searchTitle.value = value;
+                  },
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    isDense: true,
+                    hintText: "Pesquisar por...",
+                    hintStyle: TextStyle(
+                      color: Colors.grey.shade400,
+                      fontSize: 14,
+                    ),
+                    prefixIcon: Icon(
+                      Icons.search,
+                      color: CustomColors.customContrastColor,
+                      size: 21,
+                    ),
+                    suffixIcon: controller.searchTitle.value.isNotEmpty
+                        ? IconButton(
+                            onPressed: () {
+                              searchController.clear();
+                              controller.searchTitle.value = '';
+                              FocusScope.of(context).unfocus();
+                            },
+                            icon: Icon(Icons.close, color: CustomColors.customContrastColor, size: 21,),
+                          )
+                        : null,
+                    // suffixIcon: ,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(45),
+                      borderSide:
+                          const BorderSide(width: 0, style: BorderStyle.none),
+                    ),
+                  ),
                 ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(45),
-                  borderSide:
-                      const BorderSide(width: 0, style: BorderStyle.none),
-                ),
-              ),
-            ),
+              );
+            },
           ),
 
           // Categorias
