@@ -1,7 +1,9 @@
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/models/cart_item_model.dart';
 import 'package:greengrocer/src/pages/cart/components/cart_tile.dart';
+import 'package:greengrocer/src/pages/cart/controller/cart_controller.dart';
 import 'package:greengrocer/src/services/utils_service.dart';
 import 'package:greengrocer/src/config/app_data.dart' as appData;
 
@@ -16,16 +18,6 @@ class CartTabScreen extends StatefulWidget {
 
 class _CartTabScreenState extends State<CartTabScreen> {
   final UtilsServices utilsServices = UtilsServices();
-
-  void removeItemFromCart(CartItemModel cartItem) {
-    setState(() {
-      appData.cartItems.remove(cartItem);
-      utilsServices.showToast(
-        message: '${cartItem.item.title} removido(a) do carrinho',
-        isError: false,
-      );
-    });
-  }
 
   double cartTotalPrice() {
     double total = 0;
@@ -45,12 +37,18 @@ class _CartTabScreenState extends State<CartTabScreen> {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: appData.cartItems.length,
-              itemBuilder: (_, index) {
-                return CartTile(
-                    cartItem: appData.cartItems[index],
-                    remove: removeItemFromCart);
+            child: GetBuilder<CartController>(
+              builder: (controller) {
+                return ListView.builder(
+                  itemCount: controller.cartItems.length,
+                  itemBuilder: (_, index) {
+                    return CartTile(
+                      cartItem: controller.cartItems[index],
+                      // appData.cartItems[index],
+                      // remove: removeItemFromCart,
+                    );
+                  },
+                );
               },
             ),
           ),
@@ -81,13 +79,17 @@ class _CartTabScreenState extends State<CartTabScreen> {
                     fontSize: 12,
                   ),
                 ),
-                Text(
-                  utilsServices.priceToCurrency(cartTotalPrice()),
-                  style: TextStyle(
-                    fontSize: 23,
-                    color: CustomColors.customSwatchColor,
-                    fontWeight: FontWeight.bold,
-                  ),
+                GetBuilder<CartController>(
+                  builder: (controller) {
+                    return Text(
+                      utilsServices.priceToCurrency(controller.cartTotalPrice()),
+                      style: TextStyle(
+                        fontSize: 23,
+                        color: CustomColors.customSwatchColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  },
                 ),
                 SizedBox(
                   height: 50,
@@ -110,7 +112,7 @@ class _CartTabScreenState extends State<CartTabScreen> {
                                 order: appData.orders.first, // somente testes
                               );
                             });
-                      } else{
+                      } else {
                         utilsServices.showToast(
                           message: 'Pedido não confirmado',
                           isError: false,
