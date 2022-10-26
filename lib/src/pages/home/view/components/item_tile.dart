@@ -58,8 +58,8 @@ class _ItemTileState extends State<ItemTile> {
                   Expanded(
                     child: Hero(
                       tag: widget.item.picture,
-                      child: Image.network(
-                        widget.item.picture,
+                      child: Image.network( // flutter pub add cached_network_image
+                        widget.item.picture
                       ),
                     ),
                   ),

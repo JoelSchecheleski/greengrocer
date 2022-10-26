@@ -7,7 +7,7 @@ class CartRepository {
   final _httpManager = HttpManager();
 
   // Buscando dados do carinho
-  Future getCartItems({required String token, required String userId}) async { // <CartResult<List>>
+  Future<CartResult<List<CartItemModel>>> getCartItems({required String token, required String userId}) async { // <CartResult<List>>
     final result = await _httpManager.restRequest(
       url: EndPoints.getCartItems,
       method: HttpMethods.post,
@@ -16,12 +16,15 @@ class CartRepository {
         'user': userId,
       },
     );
-
-    print('Executou endpoint');
     if (result['result'] != null) {
-      print(result['result']);
+      List<CartItemModel> data =
+      (List<Map<String, dynamic>>.from(result['result']))
+          .map(CartItemModel.fromJson)
+          .toList();
+      return CartResult<List<CartItemModel>>.success(data);
     } else {
-      print('Ocorreu um erro ao recuperar os itens do carrinho');
+      return CartResult.error(
+          'Ocorreu um erro inesperado ao recuperar itens do carrinho!');
     }
   }
 }

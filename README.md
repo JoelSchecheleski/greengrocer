@@ -41,6 +41,10 @@ Projeto voltado para o aprendizado do uso do GetX como gerenciador de estato.
 - json_serializable: ^6.5.1
 - build_runner: ^2.3.0
 
+## Command to generate icons
+```batch
+    flutter pub run flutter_launcher_icons:main
+```
 
 ## Command to Auto-generate toJson, fromJson
 ``` batch
