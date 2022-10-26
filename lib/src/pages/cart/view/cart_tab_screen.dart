@@ -5,7 +5,7 @@ import 'package:greengrocer/src/pages/cart/components/cart_tile.dart';
 import 'package:greengrocer/src/services/utils_service.dart';
 import 'package:greengrocer/src/config/app_data.dart' as appData;
 
-import '../common_widgets/payment_dialog.dart';
+import '../../common_widgets/payment_dialog.dart';
 
 class CartTabScreen extends StatefulWidget {
   const CartTabScreen({Key? key}) : super(key: key);
