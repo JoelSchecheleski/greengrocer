@@ -1,12 +1,9 @@
-import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:greengrocer/src/page_routes/app_pages.dart';
 import 'package:greengrocer/src/pages/common_widgets/app_name_widget.dart';
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
-  // @override
   @override
   Widget build(BuildContext context) {
     return Material(

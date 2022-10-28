@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/models/item_model.dart';
 import 'package:greengrocer/src/pages/base/controller/navigation_controller.dart';
+import 'package:greengrocer/src/pages/cart/controller/cart_controller.dart';
 import 'package:greengrocer/src/pages/common_widgets/quantity_widget.dart';
 import 'package:greengrocer/src/services/utils_service.dart';
 
@@ -22,7 +23,7 @@ class _ProductScreenState extends State<ProductScreen> {
   final UtilsServices utilsServices = UtilsServices();
 
   final navigationController = Get.find<NavigationController>();
-
+  final cartController = Get.find<CartController>();
   int cartItemQuantity = 1;
 
   @override
@@ -122,7 +123,12 @@ class _ProductScreenState extends State<ProductScreen> {
                           ),
                           onPressed: () {
                             Get.back();
-                            navigationController.navigatePageView(NavigationTabs.cart);
+                            cartController.addItemToCart(
+                              item: widget.item,
+                              quantity: cartItemQuantity,
+                            );
+                            navigationController
+                                .navigatePageView(NavigationTabs.cart);
                           },
                           label: const Text(
                             "Add ao carrinho",
