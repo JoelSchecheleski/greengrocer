@@ -59,16 +59,8 @@ class CartController extends GetxController {
     if (itemIndex >= 0) {
       // Se já existe soma a quantidade
       final product = cartItems[itemIndex];
-      final result = await changeItemQuantity(
+      await changeItemQuantity(
           item: product, quantity: (product.quantity + quantity));
-      if (result) {
-        cartItems[itemIndex].quantity += quantity;
-      } else {
-        utilsServices.showToast(
-          message: 'Ocorreu um erro ao tentar alterar a quantidade do produto',
-          isError: true,
-        );
-      }
     } else {
       // Se não existe adiciona no carrinhho
       final CartResult<String> result = await cartRespository.addItemToCart(
@@ -105,6 +97,21 @@ class CartController extends GetxController {
       cartItemId: item.id,
       quantity: quantity,
     );
+
+    if (result) {
+      if (quantity == 0) {
+        cartItems.removeWhere((element) => element.id == item.id);
+      } else {
+        cartItems.firstWhere((element) => element.id == item.id).quantity =
+            quantity;
+      }
+    } else {
+      utilsServices.showToast(
+        message: 'Ocorreu um erro ao tentar alterar a quantidade do produto',
+        isError: true,
+      );
+    }
+    update();
     return result;
   }
 }
