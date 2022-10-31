@@ -1,12 +1,14 @@
-import 'package:get/get.dart';
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
+import 'package:greengrocer/src/pages/base/controller/navigation_controller.dart';
+import 'package:greengrocer/src/pages/cart/controller/cart_controller.dart';
 import 'package:greengrocer/src/pages/common_widgets/app_name_widget.dart';
 import 'package:greengrocer/src/pages/common_widgets/custom_shimmer.dart';
+import 'package:greengrocer/src/pages/home/controller/home_controller.dart';
 import 'package:greengrocer/src/pages/home/view/components/category_tile.dart';
 import 'package:greengrocer/src/pages/home/view/components/item_tile.dart';
-import 'package:greengrocer/src/pages/home/controller/home_controller.dart';
 import 'package:greengrocer/src/services/utils_service.dart';
 
 class HomeTabScreen extends StatefulWidget {
@@ -19,8 +21,7 @@ class HomeTabScreen extends StatefulWidget {
 class _HomeTabScreenState extends State<HomeTabScreen> {
   final UtilsServices utilsServices = UtilsServices();
   final searchController = TextEditingController();
-
-  // final controller = Get.find<HomeController>();
+  final navigationController = Get.find<NavigationController>();
 
   @override
   Widget build(BuildContext context) {
@@ -46,23 +47,29 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
               top: 15,
               right: 15,
             ),
-            child: GestureDetector(
-              onTap: () {},
-              child: Badge(
-                // position: BadgePosition.topEnd(top: 10, end: 10),
-                badgeColor: CustomColors.customContrastColor,
-                badgeContent: const Text(
-                  "2",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
+            child: GetBuilder<CartController>(
+              builder: (controller) {
+                return GestureDetector(
+                  onTap: () {
+                    navigationController.navigatePageView(NavigationTabs.cart);
+                  },
+                  child: Badge(
+                    // position: BadgePosition.topEnd(top: 10, end: 10),
+                    badgeColor: CustomColors.customContrastColor,
+                    badgeContent: Text(
+                      controller.cartItems.length.toString(),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),
+                    ),
+                    child: Icon(
+                      Icons.shopping_cart,
+                      color: CustomColors.customSwatchColor,
+                    ),
                   ),
-                ),
-                child: Icon(
-                  Icons.shopping_cart,
-                  color: CustomColors.customSwatchColor,
-                ),
-              ),
+                );
+              },
             ),
           )
         ],
