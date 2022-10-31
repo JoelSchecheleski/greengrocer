@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/models/item_model.dart';
-import 'package:greengrocer/src/pages/product/product_screen.dart';
+import 'package:greengrocer/src/page_routes/app_pages.dart';
 import 'package:greengrocer/src/services/utils_service.dart';
 
 class ItemTile extends StatefulWidget {
@@ -21,9 +22,11 @@ class _ItemTileState extends State<ItemTile> {
 
   IconData tileIcon = Icons.add_shopping_cart_outlined;
 
-  Future<void> switchIcon() async{
+  Future<void> switchIcon() async {
     setState(() => tileIcon = Icons.check);
-    await Future.delayed(const Duration(milliseconds: 1500),);
+    await Future.delayed(
+      const Duration(milliseconds: 1500),
+    );
     setState(() => tileIcon = Icons.add_shopping_cart_outlined);
   }
 
@@ -33,14 +36,9 @@ class _ItemTileState extends State<ItemTile> {
       children: [
         GestureDetector(
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) {
-                  return ProductScreen(
-                    item: widget.item,
-                  );
-                },
-              ),
+            Get.toNamed(
+              PagesRoutes.productRoute,
+              arguments: widget.item,
             );
           },
           child: Card(
@@ -58,9 +56,9 @@ class _ItemTileState extends State<ItemTile> {
                   Expanded(
                     child: Hero(
                       tag: widget.item.picture,
-                      child: Image.network( // flutter pub add cached_network_image
-                        widget.item.picture
-                      ),
+                      child:
+                          Image.network(// flutter pub add cached_network_image
+                              widget.item.picture),
                     ),
                   ),
 
