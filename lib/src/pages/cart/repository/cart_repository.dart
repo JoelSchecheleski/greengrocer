@@ -9,7 +9,6 @@ class CartRepository {
   // Buscando dados do carinho
   Future<CartResult<List<CartItemModel>>> getCartItems(
       {required String token, required String userId}) async {
-    // <CartResult<List>>
     final result = await _httpManager.restRequest(
       url: EndPoints.getCartItems,
       method: HttpMethods.post,
@@ -52,5 +51,23 @@ class CartRepository {
     } else {
       return CartResult.error('Não foi possível adicionar item no carrinho');
     }
+  }
+
+  // Alterar a quantidade de itens no carrinho
+  Future<bool> changeItemQuantity({
+    required String token,
+    required String cartItemId,
+    required int quantity,
+  }) async {
+    final result = await _httpManager.restRequest(
+      url: EndPoints.modifyItemQuantity,
+      method: HttpMethods.post,
+      headers: {'X-Parse-Session-Token': token},
+      body: {
+        'cartItemId': cartItemId,
+        'quantity': quantity,
+      },
+    );
+    return result.isEmpty;
   }
 }

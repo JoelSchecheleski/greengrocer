@@ -47,7 +47,7 @@ class CartController extends GetxController {
   }
 
   int getItemIdex(ItemModel item) {
-    return cartItems.indexWhere((itemInList) => itemInList.id == item.id);
+    return cartItems.indexWhere((itemInList) => itemInList.item.id == item.id);
   }
 
   // Adiciona novo item no carrinho
@@ -58,7 +58,17 @@ class CartController extends GetxController {
     int itemIndex = getItemIdex(item);
     if (itemIndex >= 0) {
       // Se já existe soma a quantidade
-      cartItems[itemIndex].quantity += quantity;
+      final product = cartItems[itemIndex];
+      final result = await changeItemQuantity(
+          item: product, quantity: (product.quantity + quantity));
+      if (result) {
+        cartItems[itemIndex].quantity += quantity;
+      } else {
+        utilsServices.showToast(
+          message: 'Ocorreu um erro ao tentar alterar a quantidade do produto',
+          isError: true,
+        );
+      }
     } else {
       // Se não existe adiciona no carrinhho
       final CartResult<String> result = await cartRespository.addItemToCart(
@@ -67,17 +77,34 @@ class CartController extends GetxController {
         productId: item.id,
         quantity: quantity,
       );
-      result.when(success: (cartItemId) {
-        cartItems.add(
-          CartItemModel(
-            id: cartItemId,
-            item: item,
-            quantity: quantity,
-          ),
-        );
-      }, error: (message) {
-        utilsServices.showToast(message: message, isError: true);
-      });
+      result.when(
+        success: (cartItemId) {
+          cartItems.add(
+            CartItemModel(
+              id: cartItemId,
+              item: item,
+              quantity: quantity,
+            ),
+          );
+        },
+        error: (message) {
+          utilsServices.showToast(message: message, isError: true);
+        },
+      );
     }
+    update();
+  }
+
+  // Alterar a quantidade de itens no carrinho
+  Future<bool> changeItemQuantity({
+    required CartItemModel item,
+    required int quantity,
+  }) async {
+    final result = await cartRespository.changeItemQuantity(
+      token: authController.user.token!,
+      cartItemId: item.id,
+      quantity: quantity,
+    );
+    return result;
   }
 }
