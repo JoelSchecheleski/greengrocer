@@ -1,7 +1,6 @@
-import 'package:get/get.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-import 'package:greengrocer/src/config/app_data.dart';
+import 'package:get/get.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/page_routes/app_pages.dart';
 import 'package:greengrocer/src/pages/auth/controller/auth_controller.dart';
@@ -22,15 +21,15 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    // final size = MediaQuery.of(context).size;
 
     return Scaffold(
       backgroundColor: CustomColors.customSwatchColor,
       // Color.fromRGBO(78, 136, 27, 1.0),
       body: SingleChildScrollView(
         child: SizedBox(
-          height: size.height,
-          width: size.width,
+          height: context.height, // size.height
+          width: context.width, // size.width
           child: Column(
             children: [
               const Padding(

@@ -4,13 +4,12 @@ import 'package:greengrocer/src/models/order_model.dart';
 import 'package:greengrocer/src/models/user_model.dart';
 
 ItemModel apple = ItemModel(
-  description:
-      'A melhor maçã da região e que conta com o melhor preço de qualquer quitanda. Este item conta com vitaminas essenciais para o fortalecimento corporal, resultando em uma vida saudável.',
-  picture: 'assets/images/fruits/apple.png',
-  title: 'Maçã',
-  price: 5.5,
-  unit: 'kg'
-);
+    description:
+        'A melhor maçã da região e que conta com o melhor preço de qualquer quitanda. Este item conta com vitaminas essenciais para o fortalecimento corporal, resultando em uma vida saudável.',
+    picture: 'assets/images/fruits/apple.png',
+    title: 'Maçã',
+    price: 5.5,
+    unit: 'kg');
 
 ItemModel grape = ItemModel(
   picture: 'assets/images/fruits/grape.png',
@@ -93,96 +92,100 @@ UserModel user = UserModel(
 
 List<OrderModel> orders = [
   // Pedido 01
-  OrderModel(
-    copyAndPaste: 'q1w2e3r4t5y6',
-    createdDateTime: DateTime.parse(
-      '2022-06-08 10:00:10.458',
-    ),
-    overdueDateTime: DateTime.parse(
-      '2022-12-12 11:00:10.458',
-    ),
-    id: 'asd6a54da6s2d1',
-    status: 'preparing_purchase',
-    total: 11.0,
-    items: [
-      CartItemModel(
-        id: '0002',
-        item: apple,
-        quantity: 2,
-      ),
-      CartItemModel(
-        id: '0002',
-        item: mango,
-        quantity: 2,
-      ),
-      CartItemModel(
-        id: '0002',
-        item: grape,
-        quantity: 8,
-      ),
-    ],
-  ),
-
-  // Pedido 02
-  OrderModel(
-    copyAndPaste: 'q1w2e3r4t5y6',
-    createdDateTime: DateTime.parse(
-      '2022-12-12 10:00:10.458',
-    ),
-    overdueDateTime: DateTime.parse(
-      '2022-12-12 11:00:10.458',
-    ),
-    id: 'a65s4d6a2s1d6a5s',
-    status: 'delivered',
-    total: 11.5,
-    items: [
-      CartItemModel(
-        id: '0002',
-        item: guava,
-        quantity: 1,
-      ),
-    ],
-  ),
-
-  // Pedido 03
-  OrderModel(
-    copyAndPaste: 'q1w2e3r4t5y6',
-    createdDateTime: DateTime.parse(
-      '2022-12-12 10:00:10.458',
-    ),
-    overdueDateTime: DateTime.parse(
-      '2022-12-12 11:00:10.458',
-    ),
-    id: 'a65s4d6a2s1d6a5s',
-    status: 'refunded',
-    total: 11.5,
-    items: [
-      CartItemModel(
-        id: '0002',
-        item: guava,
-        quantity: 1,
-      ),
-    ],
-  ),
-
-  // Pedido 04
-  OrderModel(
-    copyAndPaste: 'q1w2e3r4t5y6',
-    createdDateTime: DateTime.parse(
-      '2020-12-12 10:00:10.458',
-    ),
-    overdueDateTime: DateTime.parse(
-      '2020-12-12 11:00:10.458',
-    ),
-    id: 'a65s4d6a2s1d6a5s',
-    status: 'pending_payment',
-    total: 11.5,
-    items: [
-      CartItemModel(
-        id: '0002',
-        item: guava,
-        quantity: 1,
-      ),
-    ],
-  ),
+  // OrderModel(
+  //   qrCodeImage: '',
+  //   copyAndPaste: 'q1w2e3r4t5y6',
+  //   createdDateTime: DateTime.parse(
+  //     '2022-06-08 10:00:10.458',
+  //   ),
+  //   overdueDateTime: DateTime.parse(
+  //     '2022-12-12 11:00:10.458',
+  //   ),
+  //   id: 'asd6a54da6s2d1',
+  //   status: 'preparing_purchase',
+  //   total: 11.0,
+  //   items: [
+  //     CartItemModel(
+  //       id: '0002',
+  //       item: apple,
+  //       quantity: 2,
+  //     ),
+  //     CartItemModel(
+  //       id: '0002',
+  //       item: mango,
+  //       quantity: 2,
+  //     ),
+  //     CartItemModel(
+  //       id: '0002',
+  //       item: grape,
+  //       quantity: 8,
+  //     ),
+  //   ],
+  // ),
+  //
+  // // Pedido 02
+  // OrderModel(
+  //   qrCodeImage: '',
+  //   copyAndPaste: 'q1w2e3r4t5y6',
+  //   createdDateTime: DateTime.parse(
+  //     '2022-12-12 10:00:10.458',
+  //   ),
+  //   overdueDateTime: DateTime.parse(
+  //     '2022-12-12 11:00:10.458',
+  //   ),
+  //   id: 'a65s4d6a2s1d6a5s',
+  //   status: 'delivered',
+  //   total: 11.5,
+  //   items: [
+  //     CartItemModel(
+  //       id: '0002',
+  //       item: guava,
+  //       quantity: 1,
+  //     ),
+  //   ],
+  // ),
+  //
+  // // Pedido 03
+  // OrderModel(
+  //   qrCodeImage: '',
+  //   copyAndPaste: 'q1w2e3r4t5y6',
+  //   createdDateTime: DateTime.parse(
+  //     '2022-12-12 10:00:10.458',
+  //   ),
+  //   overdueDateTime: DateTime.parse(
+  //     '2022-12-12 11:00:10.458',
+  //   ),
+  //   id: 'a65s4d6a2s1d6a5s',
+  //   status: 'refunded',
+  //   total: 11.5,
+  //   items: [
+  //     CartItemModel(
+  //       id: '0002',
+  //       item: guava,
+  //       quantity: 1,
+  //     ),
+  //   ],
+  // ),
+  //
+  // // Pedido 04
+  // OrderModel(
+  //   qrCodeImage: '',
+  //   copyAndPaste: 'q1w2e3r4t5y6',
+  //   createdDateTime: DateTime.parse(
+  //     '2020-12-12 10:00:10.458',
+  //   ),
+  //   overdueDateTime: DateTime.parse(
+  //     '2020-12-12 11:00:10.458',
+  //   ),
+  //   id: 'a65s4d6a2s1d6a5s',
+  //   status: 'pending_payment',
+  //   total: 11.5,
+  //   items: [
+  //     CartItemModel(
+  //       id: '0002',
+  //       item: guava,
+  //       quantity: 1,
+  //     ),
+  //   ],
+  // ),
 ];

@@ -1,6 +1,8 @@
 import 'package:greengrocer/src/constants/endpoints.dart';
 import 'package:greengrocer/src/models/cart_item_model.dart';
+import 'package:greengrocer/src/models/order_model.dart';
 import 'package:greengrocer/src/pages/cart/result/cart_result.dart';
+import 'package:greengrocer/src/pages/cart/result/checkout_result.dart';
 import 'package:greengrocer/src/services/http_manager.dart';
 
 class CartRepository {
@@ -69,5 +71,26 @@ class CartRepository {
       },
     );
     return result.isEmpty;
+  }
+
+  // Finalizar pedido, mas pode ser usado um CartResult
+  Future<CheckoutResult<OrderModel>> checkoutCart({
+    required String token,
+    required double total,
+  }) async {
+    final result = await _httpManager.restRequest(
+      url: EndPoints.checkout,
+      method: HttpMethods.post,
+      headers: {'X-Parse-Session-Token': token},
+      body: {
+        'total': total,
+      },
+    );
+    if (result['result'] != null) {
+      final order = OrderModel.fromJson(result['result']);
+      return CheckoutResult<OrderModel>.success(order);
+    } else {
+      return CheckoutResult.error('Não foi possível realizar o pedido');
+    }
   }
 }
