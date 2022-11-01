@@ -5,31 +5,36 @@ import 'package:greengrocer/src/pages/orders/repository/orders_respository.dart'
 import 'package:greengrocer/src/pages/orders/result/orders_result.dart';
 import 'package:greengrocer/src/services/utils_service.dart';
 
-class OrderController extends GetxController {
+class AllOrdersController extends GetxController {
   List<OrderModel> allOrders = [];
-  final orderRepository = OrdersRepository();
+  final ordersRepository = OrdersRepository();
   final authController = Get.find<AuthController>();
-  final utilsService = UtilsServices();
+  final utilsServices = UtilsServices();
 
   @override
   void onInit() {
     super.onInit();
+
     getAllOrders();
   }
 
-  // Obtem a lista de pedidos do usuário
   Future<void> getAllOrders() async {
-    OrdersResult<List<OrderModel>> result = await orderRepository.getAllOrders(
-      token: authController.user.token!,
+    OrdersResult<List<OrderModel>> result = await ordersRepository.getAllOrders(
       userId: authController.user.id!,
+      token: authController.user.token!,
     );
+
     result.when(
       success: (orders) {
-        allOrders = orders;
+        allOrders = orders
+          ..sort((a, b) => b.createdDateTime!.compareTo(a.createdDateTime!));
         update();
       },
       error: (message) {
-        utilsService.showToast(message: message, isError: true);
+        utilsServices.showToast(
+          message: message,
+          isError: true,
+        );
       },
     );
   }

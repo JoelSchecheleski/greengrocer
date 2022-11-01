@@ -23,6 +23,8 @@ class OrderModel {
   @JsonKey(defaultValue: [])
   List<CartItemModel> items;
 
+  bool get isOverDue => overdueDateTime.isBefore(DateTime.now());
+
   OrderModel({
     required this.id,
     required this.total,
