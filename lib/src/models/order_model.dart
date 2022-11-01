@@ -17,6 +17,7 @@ class OrderModel {
 
   String status;
 
+  @JsonKey(name: 'createdAt')
   DateTime? createdDateTime;
 
   @JsonKey(defaultValue: [])
