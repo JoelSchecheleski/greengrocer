@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
@@ -53,9 +53,8 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                   onTap: () {
                     navigationController.navigatePageView(NavigationTabs.cart);
                   },
-                  child: Badge(
-                    // position: BadgePosition.topEnd(top: 10, end: 10),
-                    badgeColor: CustomColors.customContrastColor,
+                  child: badges.Badge(
+                    position: badges.BadgePosition.topEnd(top: 10, end: 10),
                     badgeContent: Text(
                       controller.cartItems.length.toString(),
                       style: const TextStyle(
@@ -63,6 +62,7 @@ class _HomeTabScreenState extends State<HomeTabScreen> {
                         fontSize: 12,
                       ),
                     ),
+                    badgeStyle: badges.BadgeStyle(badgeColor: CustomColors.customContrastColor),
                     child: Icon(
                       Icons.shopping_cart,
                       color: CustomColors.customSwatchColor,
